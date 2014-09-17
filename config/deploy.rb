@@ -1,5 +1,8 @@
 set :application, 'my_app_name'
+
 set :repo_url, 'git@example.com:me/my_repo.git'
+# If repo is located in the same server as where the app is deployed change to
+# set :repo_url, 'file:///home/public_html/code/rqgtest.git'
 
 # Branch options
 # Prompts for the branch name (defaults to current branch)
@@ -11,7 +14,12 @@ set :branch, :master
 
 set :deploy_to, -> { "/srv/www/#{fetch(:application)}" }
 
+# Path to where composer was intalled on server
+SSHKit.config.command_map[:composer] =  "php-cli /home4/addvida1/composer.phar"
+
 set :log_level, :info
+# For debug change to line bellow
+# set :log_level, :debug
 
 # Apache users with .htaccess files:
 # it needs to be added to linked_files so it persists across deploys:
