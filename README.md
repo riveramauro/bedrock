@@ -123,6 +123,20 @@ See http://capistranorb.com/documentation/getting-started/authentication-and-aut
 
 * Edit stage/environment configs in `config/deploy/` to set the roles/servers and connection options.
 
+### Aditional Steps for Shared Hosting (Bluehost)
+
+* Make sure server is using PHP 5.4 or greater.
+
+#### Install composer on server
+1. SSH to server
+2. Run `curl -sS https://getcomposer.org/installer | php`
+
+#### Modify the `deploy.rb` file
+On the `deploy.rb` file, under the `config` folder, modify the following lines (see the actual file for notes):
+
+1. Mofify the `SSHKit.config.command_map[:composer] =  "php-cli /home/user/composer.phar"` line to point to where `Composer` was installed on the step above.
+2. If the repo live on the same server as the deployment server change the line `set :repo_url` to point to where the repos is located. Make sure you have `file:///` at the begining.
+
 ## Documentation
 
 ### Folder Structure
